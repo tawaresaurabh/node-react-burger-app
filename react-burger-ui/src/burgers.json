@@ -1,0 +1,27 @@
+[
+    {
+      "id": "1",
+      "name": "Burger",
+      "price": 5,
+      "time" : 15,
+      "description": "A tiny burger",
+      "steps" : ["GRILLED", "ADDED_SAUCE" , "ADDED_VEGGIES"]
+    },
+    {   "id": "2",
+        "name": "Burger with Fries",
+        "price": 10,
+        "time" : 20,
+        "description": "A bit bigger burger",
+        "steps" : ["GRILLED", "ADDED_SAUCE" , "ADDED_VEGGIES", "ADDED_FRIES"]
+      },
+    {
+      "id": "3",
+      "name": "Burger Meal",
+      "price": 20,
+      "time" : 30,
+      "description": "Biggest burger",
+      "steps" : ["GRILLED", "ADDED_SAUCE" , "ADDED_VEGGIES", "ADDED_FRIES", "MADE_DRINKS" , "MADE_SALADS" ]
+    }
+    
+  ]
+  
