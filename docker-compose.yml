@@ -1,0 +1,64 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    networks:
+      - backend    
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  mongo:
+    image: mongo
+    container_name: mongo-db
+    networks:
+      - backend   
+    ports:
+      - "27017-27019:27017-27019"
+
+  api1:
+    image: sample-express-app-1
+    build: ./node-docker-app-1
+    networks:
+      - backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./node-docker-app-1:/usr/src/app
+    environment:
+      WAIT_HOSTS: rabbitmq:5672, mongo:27017
+      WAIT_AFTER_HOSTS : 20
+    command: sh -c "/wait && npm install && npm run dev"      
+
+
+  api2:
+    image: sample-express-app-2
+    build: ./node-docker-app-2
+    networks:
+      - backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./node-docker-app-2:/usr/src/app
+    environment:
+      WAIT_HOSTS: rabbitmq:5672
+      WAIT_AFTER_HOSTS : 20
+    command: sh -c "/wait && npm install && npm run dev"          
+
+
+  web-cli1:
+    image: sample-express-app-1
+    networks:
+      - backend
+    command: sh
+
+  web-cli2:
+    image: sample-express-app-2
+    networks:
+      - backend
+    command: sh
+
+networks:
+  backend:
+    driver: bridge
